@@ -1,5 +1,4 @@
 import csv
-import matplotlib.pyplot as plt
 
 # Lecture du fichier CSV
 def lire_csv(Magass):
@@ -37,34 +36,3 @@ def calculer_statistiques(donnees):
         stats[prefect]['taux'] = deces / cas if cas > 0 else 0.0
     return stats
 
-# Visualisation
-def visualiser_donnees(stats):
-    """
-    Génère deux diagrammes à barres : cas totaux et taux de mortalité.
-    """
-    prefectures = list(stats.keys())
-    cas = [stats[prefect]['cas'] for prefect in prefectures]
-    taux = [stats[prefect]['taux'] for prefect in prefectures]
-
-    # Diagramme des cas
-    plt.figure(figsize=(10, 5))
-    plt.bar(prefectures, cas, color='blue')
-    plt.title('Nombre total de cas par préfecture')
-    plt.xlabel('Préfecture')
-    plt.ylabel('Cas')
-
-    # Diagramme du taux de mortalité
-    plt.figure(figsize=(10, 5))
-    plt.bar(prefectures, taux, color='yellow')
-    plt.title('Taux de mortalité par préfecture')
-    plt.xlabel('Préfecture')
-    plt.ylabel('Taux (Décès/Cas)')
-    plt.ylim(0, 1)  # Une meilleure lisibilité
-
-    plt.show()
-
-# Exécution principale
-if __name__ == "__main__":
-    donnees = lire_csv('ebola_guinea.csv')
-    stats = calculer_statistiques(donnees)
-    visualiser_donnees(stats)
